@@ -20,7 +20,7 @@ public class PasswordBookWithDAO {
     System.out.println("--- updating smu2 to smu1...");
     pw = passwordDao.findByKey("https://www.smu2.ac.kr");
     pw.setId("smu1");
-    passwordDao.update(pw);
+    passwordDao.update(pw.getUrl(),pw);
 
     // 4. 해당 데이터가 제대로 수정되었는지 데이터 출력으로 확인.
     System.out.println("--- checking updated information...");

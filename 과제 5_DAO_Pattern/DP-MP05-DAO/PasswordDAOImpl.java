@@ -58,11 +58,11 @@ public class PasswordDAOImpl implements PasswordDAO {
     return passwords;
   }
 
-  public PasswordInfo findByKey(String url) {
+  public PasswordInfo findByKey(String key) {
     PasswordInfo pw = null;
     try {
       String fmt = "SELECT * FROM %s WHERE url = '%s'";
-      String q = String.format(fmt, DB_TABLE_NAME, url);
+      String q = String.format(fmt, DB_TABLE_NAME, key);
 
       rs = statement.executeQuery(q);
 
@@ -80,25 +80,24 @@ public class PasswordDAOImpl implements PasswordDAO {
     return pw;
   }
 
-  public void update(PasswordInfo pw) {
+  public void update(String key, PasswordInfo pw) {
     if (pw != null) {
       try {
-        String fmt = "UPDATE %s SET id = '%s' WHERE url = '%s'";
-        String q = String.format(fmt, DB_TABLE_NAME, pw.getId(), pw.getUrl());
+        String fmt = "UPDATE %s SET id = '%s', password = '%s' WHERE url = '%s'";
+        String q = String.format(fmt, DB_TABLE_NAME, pw.getId(), pw.getPassword(), pw.getUrl());
         
         statement.execute(q);
       } 
       catch (Exception e) {
         e.printStackTrace();
-        // TODO: handle exception
       }
     }
   }
 
-  public void delete(String url) {
+  public void delete(String key) {
     try {
       String fmt = "DELETE FROM %s WHERE url = '%s'";
-      String q = String.format(fmt, DB_TABLE_NAME, url);
+      String q = String.format(fmt, DB_TABLE_NAME, key);
 
       statement.execute(q);
     } 
