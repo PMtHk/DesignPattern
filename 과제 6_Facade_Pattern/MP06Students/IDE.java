@@ -16,7 +16,7 @@ public class IDE implements Builder {
   }
 
   public void createProject(String prj_name){
-    this.ProjectName = prj_name;
+    this.ProjectName = prj_name + ".exe";
   }
 
   public Executable build(SourceCode[] sourceCodes){
