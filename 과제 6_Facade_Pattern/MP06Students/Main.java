@@ -49,7 +49,6 @@ public class Main {
         // IDE를 사용할 때는 배열과 리스트 버전 두 가지 빌드 함수를 각각 사용해서
         // ArrayProject.exe와 ListProject.exe를 생성하는 코드를 추가할 것
         // 배열을 리스트로 변환하는 것은 Arrays.asList() 함수 사용 가능
- 
         /*
         코드 추가 
         */
