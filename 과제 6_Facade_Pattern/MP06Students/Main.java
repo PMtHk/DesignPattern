@@ -60,5 +60,9 @@ public class Main {
             code[i] = new SourceCode(fileNames[i]);
         }
         ide.build(code);
+
+        ide.createProject("ListProject");
+        List<SourceCode> list = Arrays.asList(code);
+        ide.build(list);
     }
 }

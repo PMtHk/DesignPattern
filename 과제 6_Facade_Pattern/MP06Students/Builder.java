@@ -18,5 +18,5 @@ public interface Builder {
      */
     void createProject(String prj_name);
     Executable build(SourceCode[] sourceCodes);
-    // Executable build(List<SourceCode> sourceCodes);
+    Executable build(List<SourceCode> sourceCodes);
 }
