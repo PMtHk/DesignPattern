@@ -3,9 +3,9 @@ public class PreProcessorImpl implements Preprocessor {
   public SourceCode preprocess(SourceCode srcCode) {
     String oldSrcCodeName = srcCode.getFileName();
 
-    System.out.println("Preprocessing C code: " + oldSrcCodeName);
+    System.out.println("Preprocessing code: " + oldSrcCodeName);
     SourceCode newSrcCode = new SourceCode("preprocessed_" + oldSrcCodeName);
-    System.out.println("Generating a new C code: " + newSrcCode.getFileName());
+    System.out.println("Generating a new  code: " + newSrcCode.getFileName());
     
     return newSrcCode;
   }
