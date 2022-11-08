@@ -51,9 +51,14 @@ public class Main {
         // 배열을 리스트로 변환하는 것은 Arrays.asList() 함수 사용 가능
  
         /*
-        
         코드 추가 
-        
         */
+
+        Builder ide = new IDE("ArrayProject", preprocessor, compiler, linker);
+        code = new SourceCode[fileNames.length];
+        for (int i = 0; i < fileNames.length; i++) {
+            code[i] = new SourceCode(fileNames[i]);
+        }
+        ide.build(code);
     }
 }

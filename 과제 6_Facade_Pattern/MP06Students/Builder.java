@@ -1,5 +1,7 @@
 import java.util.List;
 
+import javax.xml.transform.Source;
+
 public interface Builder {
     /*
        createProject()는 새로운 프로젝트_이름을 지정하기 위해 사용됨
@@ -14,4 +16,7 @@ public interface Builder {
      /*
      함수 헤더 선언
      */
+    void createProject(String prj_name);
+    Executable build(SourceCode[] sourceCodes);
+    // Executable build(List<SourceCode> sourceCodes);
 }
