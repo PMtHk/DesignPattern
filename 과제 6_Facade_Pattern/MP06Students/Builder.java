@@ -11,9 +11,7 @@ public interface Builder {
        createProject(), build() 함수 2개에 해당되는 함수 헤더를 아래에 작성하고, 이를 구현하는 IDE 클래스를 만들 것
      */
      
-     /* 
-     
+     /*
      함수 헤더 선언
-     
      */
 }

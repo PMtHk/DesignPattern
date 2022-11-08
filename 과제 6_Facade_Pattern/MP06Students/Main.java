@@ -12,9 +12,9 @@ public class Main {
         아래 코드 수정
         
         */
-        Preprocessor preprocessor = ;
-        Compiler compiler = ;
-        Linker linker = ;
+        Preprocessor preprocessor = new PreProcessorImpl();
+        Compiler compiler = new CompilerImpl();
+        Linker linker = new LinkerImpl();
         
         // 프리프로세서, 컴파일러, 링커를 각각 따로 사용해서 exe파일 생성하고 실행
         String[] fileNames = { "a.c", "b.c", "c.c" };
