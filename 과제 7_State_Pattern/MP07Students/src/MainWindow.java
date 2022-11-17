@@ -17,7 +17,7 @@ public class MainWindow extends FrameWindow implements ActionListener {
     private static final String FIVE_HUNDRED_BUTTON_TITLE = "500";
     private static final String RETURN_CHANGE_BUTTON_TITLE = "Return Changes";
     private static final String SELECT_BEVERAGE_BUTTON_TITLE = "Select a beverage";
-    private JLabel balanceLabel;  // 현재 투입 금액을 나타내는 화면
+    private JLabel balanceLabel; // 현재 투입 금액을 나타내는 화면
     private JLabel msgLabel; // 기타 메시지를 보여주기 위한 화면
     private MyButton hundredButton;
     private MyButton fiveHundredButton;
@@ -25,7 +25,10 @@ public class MainWindow extends FrameWindow implements ActionListener {
     private MyButton returnChangesButton;
     private MyButton selectBeverageButton;
 
-    private enum STATES { STATE_0, STATE_LESS_500, STATE_500, STATE_LESS_1000, STATE_EQUAL_OR_MORE_1000};
+    private enum STATES {
+        STATE_0, STATE_LESS_500, STATE_500, STATE_LESS_1000, STATE_EQUAL_OR_MORE_1000
+    };
+
     private STATES state;
     private int balance;
 
@@ -77,117 +80,120 @@ public class MainWindow extends FrameWindow implements ActionListener {
         panel.add(balanceLabel, BorderLayout.CENTER);
         msgLabel.setPreferredSize(new Dimension(width, (HEIGHT - BUTTON_HEIGHT) / 2));
         panel.add(msgLabel, BorderLayout.SOUTH);
+
         setBalanceText(); // 투입 금액 0
         return panel;
     }
 
     public void setBalanceText() {
-        balanceLabel.setText("현재 투입 금액: " + balance + "원");
+        balanceLabel.setText("현재 투입 금액: " + vm.getBalance() + "원");
     }
 
     public void setMsgText(String msg) {
         msgLabel.setText(msg);
     }
 
-    public void addHundred() {
-        balance += 100;
-        if (state == STATES.STATE_0) {
-            state = STATES.STATE_LESS_500;
-        }
-        else if (state == STATES.STATE_LESS_500) {
-            if (balance == 500) {
-                state = STATES.STATE_500;
-            }
-        }
-        else if (state == STATES.STATE_500) {
-            state = STATES.STATE_LESS_1000;
-        }
-        else if (state == STATES.STATE_LESS_1000) {
-            if (balance == 1000) {
-                state = STATES.STATE_EQUAL_OR_MORE_1000;
-            }
-        }
-        setBalanceText();
-        setMsgText("");
-    }
+    VendingMachine vm = new VendingMachine();
 
-    public void addFiveHundred() {
-        balance += 500;
-        if (state == STATES.STATE_0) {
-            state = STATES.STATE_500;
-        }
-        else if (state == STATES.STATE_LESS_500) {
-            state = STATES.STATE_LESS_1000;
-        }
-        else if (state == STATES.STATE_500 || state == STATES.STATE_LESS_1000) {
-            state = STATES.STATE_EQUAL_OR_MORE_1000;
-        }
-        setBalanceText();
-        setMsgText("");
-    }
+    // public void addHundred() {
+    // balance += 100;
+    // if (state == STATES.STATE_0) {
+    // state = STATES.STATE_LESS_500;
+    // } else if (state == STATES.STATE_LESS_500) {
+    // if (balance == 500) {
+    // state = STATES.STATE_500;
+    // }
+    // } else if (state == STATES.STATE_500) {
+    // state = STATES.STATE_LESS_1000;
+    // } else if (state == STATES.STATE_LESS_1000) {
+    // if (balance == 1000) {
+    // state = STATES.STATE_EQUAL_OR_MORE_1000;
+    // }
+    // }
+    // setBalanceText();
+    // setMsgText("");
+    // }
 
-    public void addThousand() {
-        balance += 1000;
-        if (state == STATES.STATE_0 || state == STATES.STATE_LESS_500
-                || state == STATES.STATE_500 || state == STATES.STATE_LESS_1000) {
-            state = STATES.STATE_EQUAL_OR_MORE_1000;
-            setMsgText("");
-        }
-        else if (state == STATES.STATE_EQUAL_OR_MORE_1000) {
-            setMsgText("이미 충분한 돈이 투입되었습니다. 음료를 선택하세요");
-        }
-        setBalanceText();
-    }
+    // public void addFiveHundred() {
+    // balance += 500;
+    // if (state == STATES.STATE_0) {
+    // state = STATES.STATE_500;
+    // } else if (state == STATES.STATE_LESS_500) {
+    // state = STATES.STATE_LESS_1000;
+    // } else if (state == STATES.STATE_500 || state == STATES.STATE_LESS_1000) {
+    // state = STATES.STATE_EQUAL_OR_MORE_1000;
+    // }
+    // setBalanceText();
+    // setMsgText("");
+    // }
 
-    public void returnChanges() {
-        if (state == STATES.STATE_LESS_500 || state == STATES.STATE_500 ||
-            state == STATES.STATE_LESS_1000 || state == STATES.STATE_EQUAL_OR_MORE_1000) {
-            state = STATES.STATE_0;
-            setMsgText("" + balance + "원을 반환합니다");
-            balance = 0;
-            setBalanceText();
-        }
-        else {
-            setMsgText("");
-        }
-    }
+    // public void addThousand() {
+    // balance += 1000;
+    // if (state == STATES.STATE_0 || state == STATES.STATE_LESS_500
+    // || state == STATES.STATE_500 || state == STATES.STATE_LESS_1000) {
+    // state = STATES.STATE_EQUAL_OR_MORE_1000;
+    // setMsgText("");
+    // } else if (state == STATES.STATE_EQUAL_OR_MORE_1000) {
+    // setMsgText("이미 충분한 돈이 투입되었습니다. 음료를 선택하세요");
+    // }
+    // setBalanceText();
+    // }
 
-    public void selectBeverage() {
-        if (state == STATES.STATE_EQUAL_OR_MORE_1000) {
-            String msg = "음료를 내보냅니다. 배출구를 확인하세요.";
-            balance -= 1000;
-            if (balance > 0) {
-                msg = msg + " 거스름돈 " + balance + "원을 반환합니다.";
-                balance = 0;
-            }
-            setBalanceText();
-            setMsgText(msg);
-            state = STATES.STATE_0;
-        }
-        else if (state == STATES.STATE_0) {
-            setMsgText("돈을 넣은 후에 눌러주세요");
-        }
-        else {
-            setMsgText("1000원 이상을 넣은 후에 눌러주세요");
-        }
-    }
+    // public void returnChanges() {
+    // if (state == STATES.STATE_LESS_500 || state == STATES.STATE_500 ||
+    // state == STATES.STATE_LESS_1000 || state == STATES.STATE_EQUAL_OR_MORE_1000)
+    // {
+    // state = STATES.STATE_0;
+    // setMsgText("" + balance + "원을 반환합니다");
+    // balance = 0;
+    // setBalanceText();
+    // } else {
+    // setMsgText("");
+    // }
+    // }
+
+    // public void selectBeverage() {
+    // if (state == STATES.STATE_EQUAL_OR_MORE_1000) {
+    // String msg = "음료를 내보냅니다. 배출구를 확인하세요.";
+    // balance -= 1000;
+    // if (balance > 0) {
+    // msg = msg + " 거스름돈 " + balance + "원을 반환합니다.";
+    // balance = 0;
+    // }
+    // setBalanceText();
+    // setMsgText(msg);
+    // state = STATES.STATE_0;
+    // } else if (state == STATES.STATE_0) {
+    // setMsgText("돈을 넣은 후에 눌러주세요");
+    // } else {
+    // setMsgText("1000원 이상을 넣은 후에 눌러주세요");
+    // }
+    // }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == hundredButton) {
-            addHundred();
-        }
-        else if (e.getSource() == fiveHundredButton) {
-            addFiveHundred();
-        }
-        else if (e.getSource() == thousandButton) {
-            addThousand();
-        }
-        else if (e.getSource() == returnChangesButton) {
-            returnChanges();
-        }
-        else if (e.getSource() == selectBeverageButton) {
-            selectBeverage();
+            vm.addHundred();
+            setMsgText(vm.getMsg());
+            setBalanceText();
+        } else if (e.getSource() == fiveHundredButton) {
+            vm.addFiveHundred();
+            setMsgText(vm.getMsg());
+            setBalanceText();
+        } else if (e.getSource() == thousandButton) {
+            vm.addThousand();
+            setMsgText(vm.getMsg());
+            setBalanceText();
+            
+        } else if (e.getSource() == returnChangesButton) {
+            vm.returnChanges();
+            setMsgText(vm.getMsg());
+            setBalanceText();
+
+        } else if (e.getSource() == selectBeverageButton) {
+            vm.selectBeverage();
+            setBalanceText();
+            setMsgText(vm.getMsg());
         }
     }
 }
