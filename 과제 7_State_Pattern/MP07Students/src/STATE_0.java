@@ -8,16 +8,19 @@ public class STATE_0 implements State {
   public void addHundred() {
     vMachine.setBalance(100);
     vMachine.setState(vMachine.STATE_LESS_500);
+    vMachine.setMsg("");
   }
 
   public void addFiveHundred() {
     vMachine.setBalance(500);
     vMachine.setState(vMachine.STATE_500);
+    vMachine.setMsg("");
   }
 
   public void addThousand() {
     vMachine.setBalance(1000);
     vMachine.setState(vMachine.STATE_EQUAL_OR_MORE_1000);
+    vMachine.setMsg("");
   }
 
   public void returnChanges() {
