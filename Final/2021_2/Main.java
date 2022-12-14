@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class Main {
-    final int MIN_PRICE = 1000;   // 판매 영화(혹은 시리즈) 최소 가격
-    final int MAX_PRICE = 10000;  // 판매 영화(혹은 시리즈) 최대 가격
+    final int MIN_PRICE = 1000; // 판매 영화(혹은 시리즈) 최소 가격
+    final int MAX_PRICE = 10000; // 판매 영화(혹은 시리즈) 최대 가격
     final int DIFF = MAX_PRICE - MIN_PRICE;
 
     // Random클래스 사용할 때 항상 같은 패턴이 나오도록 하기 위해, seed를 고정시킴
@@ -13,7 +13,7 @@ public class Main {
     }
 
     public MovieSeries createMovieSeries(String name, String[] movieNames,
-                                         int[] years, double discountRate) {
+            int[] years, double discountRate) {
         // 새로운 시리즈 생성
         MovieSeries ms = new MovieSeries(name, 2021, discountRate);
 
@@ -43,7 +43,7 @@ public class Main {
         }
         System.out.println("***** 시리즈 생성해서 라이브러리에 추가 *****");
         MovieSeries ms = createMovieSeries("Awesome Movie Series", movieSeriesNames, productionYears, 30);
-        System.out.printf("***** 시리즈의 세 번째 영화가 %s인지 확인 *****\n", movieSeriesNames[2]);
+        System.out.printf("***** 시리즈의 세 번째 영화가 %s 인지 확인 *****\n", movieSeriesNames[2]);
         Movie f = (Movie) ms.getMovie(2);
         System.out.printf("세 번째 영화 제목: %s, 제작 년도: %d\n", f.getName(), f.getProductionYear());
 
