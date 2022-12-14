@@ -6,7 +6,7 @@ public class MovieLibrary {
   ArrayList<MovieSeries> movieSeries = new ArrayList<MovieSeries>();
 
   private String name; // 라이브러리 이름
-  private double totalPrice = 0;
+  
 
   public MovieLibrary(String libName) {
     name = libName;
@@ -17,13 +17,19 @@ public class MovieLibrary {
   }
 
   public double getTotalPrice() {
+    double totalPrice = 0.0;
+    for (Movie mv : movies) {
+      totalPrice += mv.getPrice();
+    }
+    for (MovieSeries mvs : movieSeries) {
+      totalPrice += mvs.getPrice();
+    }
     return totalPrice;
   }
 
   public void insert(Movie mv, boolean replace) {
     if (replace == false) {
       movies.add(mv);
-      totalPrice += mv.getPrice();
       System.out.println("MovieLibrary: " + mv.getProductionYear() + " 년도에 제작된(구성된) 영화(시리즈) " + mv.getName() + "가(이) 추가되었습니다.");
     }
     // TODO: replace 가 true 면 기존 것 삭제 후 새로 추가
@@ -32,8 +38,7 @@ public class MovieLibrary {
   public void insert(MovieSeries mvs, boolean replace) {
     if (replace == false) {
       movieSeries.add(mvs);
-      totalPrice += mvs.getTotalPrice();
-      System.out.println("MovieLibrary: " + mvs.getCreatedYear() + " 년도에 제작된(구성된) 영화(시리즈) " + mvs.getName() + "가(이) 추가되었습니다.");
+      System.out.println("MovieLibrary: " + mvs.getProductionYear() + " 년도에 제작된(구성된) 영화(시리즈) " + mvs.getName() + "가(이) 추가되었습니다.");
     }
     // TODO: replace 가 true 면 기존 것 삭제 후 새로 추가
   }
@@ -60,20 +65,25 @@ public class MovieLibrary {
       if (movieSeries.get(i).getName() == mvs.getName()) {
         // 영화가 list에 존재
         movieSeries.remove(i);
-        System.out.println("MovieLibrary: " + mvs.getCreatedYear() + " 제작된 영화(시리즈) " + mvs.getName() + " 를(을) 삭제했습니다.");
+        System.out.println("MovieLibrary: " + mvs.getProductionYear() + " 제작된 영화(시리즈) " + mvs.getName() + " 를(을) 삭제했습니다.");
         inList = true;
       }
     }
 
     if (!inList) {
-      System.out.println("MovieLibrary: " + mvs.getCreatedYear() + " 년도에 제작된 영화(시리즈) " + mvs.getName() + " 가(이) 없습니다.");
+      System.out.println("MovieLibrary: " + mvs.getProductionYear() + " 년도에 제작된 영화(시리즈) " + mvs.getName() + " 가(이) 없습니다.");
     }
   }
 
   public String toString() {
     String str = "영화 라이브러리 : " + getLibName() + "\n";
-    str += "영화(시리즈) 개수 : " + (movies.size() + movieSeries.size()) + "       영화 라이브러리 전체 구매 가격 : " + getTotalPrice() + " 원\n";  
-
+    str += "영화(시리즈) 개수 : " + (movies.size() + movieSeries.size()) + "       영화 라이브러리 전체 구매 가격 : " + getTotalPrice() + " 원\n\n";  
+    for (Movie mv : movies) {
+      str += mv.toString() + ", 해상도 : " + mv.getResolution() + "\n";
+    }
+    for (MovieSeries mvs : movieSeries) {
+      str += mvs.toString();
+    }
     return str;
   }
 }

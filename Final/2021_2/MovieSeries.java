@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 
-public class MovieSeries {
+public class MovieSeries implements MovieComposite {
   ArrayList<Movie> movies = new ArrayList<Movie>();
   private String name;
   private Integer createdYear;
   private double discountRate;
-  
 
   public MovieSeries(String name, Integer year, double discountRate) {
     this.name = name;
@@ -54,20 +53,23 @@ public class MovieSeries {
     return name;
   }
 
-  public Integer getCreatedYear() {
+  public Integer getProductionYear() {
     return createdYear;
   }
 
   public void list() {
     String str = "";
     for (Movie mv : movies) {
-      str += mv;
+      str += mv + "\n";
     }
     System.out.println(str);
   }
 
-  public double getTotalPrice() {
+  public double getPrice() {
     double totalPrice = 0.0;
+    for (Movie mv : movies) {
+      totalPrice += mv.getPrice() * ((100 - getDiscountRate()) / 100);
+    }
     return totalPrice;
   }
 
@@ -76,9 +78,10 @@ public class MovieSeries {
   }
 
   public String toString() {
-    String str = "Movie Series Name: " + getName() + ", " + getTotalPrice() + "원, " + getDiscountRate() + "%\n";
+    String str = "Movie Series Name: " + getName() + ", " + getPrice() + "원, " + getDiscountRate() + "%\n";
     for (Movie mv : movies) {
-      str += mv;
+      str += "         제목 : " + mv.getName() + ", 제작년도: " + mv.getProductionYear() + ", 가격: " + mv.getPrice()
+          + "원, 해상도: " + mv.getResolution() + "\n";
     }
     return str;
   }
