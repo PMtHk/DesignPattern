@@ -1,7 +1,7 @@
-public class Movie implements MovieComposite{
+public class Movie implements MovieComposite {
   private String name;
   private Integer prodYear;
-  private double price  = 0.0;
+  private double price = 0.0;
   private String resolution;
 
   public Movie(String name, Integer year, int i, String res) {

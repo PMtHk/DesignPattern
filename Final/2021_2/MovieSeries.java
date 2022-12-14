@@ -24,7 +24,7 @@ public class MovieSeries implements MovieComposite {
     boolean chk = false;
 
     for (int i = 0; i < movies.size(); i++) {
-      if (movies.get(i).getName() == mv.getName()) {
+      if (movies.get(i).equals(mv)) {
         // 영화 이름이 존재하면
         System.out.println("MovieSeries: 영화 " + mv.getName() + " 가(이) 새로 교체되었습니다.");
         System.out.println("MovieSeries: 기존가격: " + movies.get(i).getPrice() + " 원, 새로운 가격: " + mv.getPrice() + " 원");
@@ -84,5 +84,11 @@ public class MovieSeries implements MovieComposite {
           + "원, 해상도: " + mv.getResolution() + "\n";
     }
     return str;
+  }
+
+  public boolean equals(MovieSeries mvs) {
+    if (name == mvs.getName() && createdYear == mvs.getProductionYear())
+      return true;
+    return false;
   }
 }
