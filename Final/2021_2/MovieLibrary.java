@@ -31,16 +31,22 @@ public class MovieLibrary {
     if (replace == false) {
       movies.add(mv);
       System.out.println("MovieLibrary: " + mv.getProductionYear() + " 년도에 제작된(구성된) 영화(시리즈) " + mv.getName() + "가(이) 추가되었습니다.");
+    } else {
+      delete(mv);
+      movies.add(mv);
+      System.out.println("MovieLibrary: " + mv.getProductionYear() + " 년도에 제작된(구성된) 영화(시리즈) " + mv.getName() + "가(이) 추가되었습니다.");
     }
-    // TODO: replace 가 true 면 기존 것 삭제 후 새로 추가
   }
 
   public void insert(MovieSeries mvs, boolean replace) {
     if (replace == false) {
       movieSeries.add(mvs);
       System.out.println("MovieLibrary: " + mvs.getProductionYear() + " 년도에 제작된(구성된) 영화(시리즈) " + mvs.getName() + "가(이) 추가되었습니다.");
+    } else {
+      delete(mvs);
+      movieSeries.add(mvs);
+      System.out.println("MovieLibrary: " + mvs.getProductionYear() + " 년도에 제작된(구성된) 영화(시리즈) " + mvs.getName() + "가(이) 추가되었습니다.");
     }
-    // TODO: replace 가 true 면 기존 것 삭제 후 새로 추가
   }
 
   public void delete(Movie mv) {
