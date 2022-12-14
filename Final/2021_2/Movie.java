@@ -1,45 +1,41 @@
-public class Movie implements MovieComposite {
-  private String name;
-  private Integer prodYear;
-  private double price = 0.0;
-  private String resolution;
+public class Movie implements MovieComponent {
+    private String name;
+    private int year;
+    private double price;
+    private String resolution;
 
-  public Movie(String name, Integer year, int i, String res) {
-    this.name = name;
-    this.prodYear = year;
-    this.price = i;
-    this.resolution = res;
-  }
+    public Movie(String name, int year, double price, String resolution) {
+        this.name = name;
+        this.year = year;
+        this.price = price;
+        this.resolution = resolution;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public Integer getProductionYear() {
-    return prodYear;
-  }
+    public int getProductionYear() {
+        return year;
+    }
 
-  public void setPrice(Double newPrice) {
-    this.price = newPrice;
-  }
+    public double getPrice() {
+        return price;
+    }
 
-  public double getPrice() {
-    return price;
-  }
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-  public String getResolution() {
-    return resolution;
-  }
+    public String getResolution() {
+        return resolution;
+    }
 
-  // toString() 구현
-  public String toString() {
-    return "제목 : " + getName() + ", 가격 : " + getPrice() + " 원";
-  }
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
+    }
 
-  // equals() 제목과 제작년도 비교
-  public boolean equals(Movie mv) {
-    if (name == mv.getName() && prodYear == mv.getProductionYear())
-      return true;
-    return false;
-  }
+    public String toString() {
+        return "영화: " + getName() + ", 가격: " + price + " 원, 해상도: " + resolution;
+    }
 }
